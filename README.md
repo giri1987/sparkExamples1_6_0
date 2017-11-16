@@ -1,0 +1,2 @@
+# sparkExamples1_6_0
+Preparation_for_hdp_spark_exam
