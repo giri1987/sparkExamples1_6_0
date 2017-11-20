@@ -1,5 +1,5 @@
-#Accumulator example :
-#=====================
+#Accumulator example :(tested in pyspark shell)
+#==============================================
 
 from pyspark import Accumulator,AccumulatorParam
 
