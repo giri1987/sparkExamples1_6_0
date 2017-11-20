@@ -1,0 +1,15 @@
+Accumulators:
+=============
+Mostly used as a global counter used for shared variable implementation in such a way that every task can update exactly once in its lifetime
+if executed inside actions only even if tasks get re-executed.There is no guarantee inside transformations for the same.
+
+1. Has an inherent support for int values.
+2. User defined also supported via user defined classes. 
+3. Update action happens when series of transformations leads to action.
+4. User defined types should inherit AccumalatorParam class and overrides its 2 methods by name zero(self,initialSize) and addInPlace(self,s1,s2)
+
+See.. accumulator_example.py for implementation details.
+
+Broadcast Variables:
+====================
+
