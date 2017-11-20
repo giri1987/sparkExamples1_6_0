@@ -13,3 +13,19 @@ See.. accumulator_example.py for implementation details.
 Broadcast Variables:
 ====================
 
+Broadcast variables are a built-in feature of Spark that allow you to efficiently share read-only reference data across a Spark cluster. 
+When a job is submitted, Spark calculates a closure consisting of all of the variables and methods required for a single executor to 
+perform operations, and then sends that closure to each worker node. Without broadcast variables, some shared data might end up serialized,
+pushed across the network, and deserialized more times than necessary.
+
+You should consider using broadcast variables under the following conditions:
+
+ 1. You have read-only reference data that does not change throughout the life of your Spark application. (Immutable in nature)
+ 2. The data is used across multiple stages of application execution and would benefit from being locally cached on the worker nodes.
+ 3. The data is small enough to fit in memory on your worker nodes, but large enough that the overhead of serializing and deserializing it
+    multiple times is impacting your performance.
+    
+Broadcast variables are implemented as wrappers around collections of simple data types, as shown in the example code below.
+They are not intended to wrap around other distributed data structures such as RDDs and DataFrames, but you can use the data in the 
+broadcast variable to construct a distributed data structure after it has been broadcast.    
+
