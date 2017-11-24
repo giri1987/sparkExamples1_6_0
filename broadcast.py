@@ -10,6 +10,5 @@ storesDF=sqlContext.read.json("/dev/datalake/app/gcr/medt/input/store_locations.
 #---------------------
 
 df=sqlContext.createDataFrame(brd_states.value,brd_schema.value)
-f_rdd=storesDF.join(df,"state").groupBy("census_division").collect()
-
+f_rdd=storesDF.join(df,"state").groupBy("census_division").agg({"census_division":"count"})
 f_rdd.show()
